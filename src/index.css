@@ -80,18 +80,18 @@
 }
 :root {
   --clr-neutral-dark-blue: #131927;
+  --ff-primary: "Outfit", sans-serif;
+  --ff-secondary: "Exo 2", sans-serif;
 }
 html {
   box-sizing: border-box;
   font-size: 62.5%; /* 1rem = 10px */
 }
-*,
-*::before,
-*::after {
+* {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--ff-primary);
 }
 .container {
   width: 100%;

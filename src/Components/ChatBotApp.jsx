@@ -1,12 +1,13 @@
 import React from "react";
+import "./ChatBotApp.css";
 
 const ChatBotApp = () => {
   return (
     <div className="chat-app">
       <div className="chat-list">
         <div className="chat-list__header">
-          <h2>Chat List</h2>
-          <i className="bx bx-edit-alt new-chat"></i>
+          <h2 id="title">Chat List</h2>
+          <i className="bx bx-edit-alt new-chat" aria-label="Edit"></i>
         </div>
         <div className="chat-list__item">
           <h4>Chat 20/07/2024 12:59:42 PM</h4>
