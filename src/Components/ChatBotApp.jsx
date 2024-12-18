@@ -39,7 +39,7 @@ const ChatBotApp = () => {
           <div className="chat__typing">Typing...</div>
         </div>
         <form className="message-form">
-          <i className="fa-solid fa-face smile emoji"></i>
+          <i className="fa-solid fa-face-smile emoji"></i>
           <label htmlFor="message-form-input" className="sr-only">
             Type a message
           </label>
