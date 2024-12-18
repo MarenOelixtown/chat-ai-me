@@ -25,7 +25,7 @@ const ChatBotApp = () => {
       <div className="chat-window">
         <div className="chat-title">
           <h3>Chat with AI</h3>
-          <i className="bx-bx-arrow-back arrow"></i>
+          <i className="bx bx-arrow-back arrow"></i>
         </div>
         <div className="chat">
           <div className="chat__prompt">

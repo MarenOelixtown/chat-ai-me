@@ -5,6 +5,7 @@
   --clr-neutral-white: #ddd;
   --clr-white: #fff;
   --clr-neutral-green: #7b8e7b;
+  --clr-neutral-blue: #7b8ebc;
 }
 .chat-app {
   width: 100%;
@@ -66,4 +67,32 @@
 .chat-list__item i {
   font-size: 2.5rem;
   color: var(--clr-one-gradient);
+}
+.chat-window {
+  width: 70%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.chat-title {
+  width: 100%;
+  min-height: 8rem;
+  background-color: var(--clr-neutral-very-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 2rem;
+}
+.chat-title h3 {
+  font-family: var(--ff-secondary);
+  font-size: 2rem;
+  text-transform: uppercase;
+  color: var(--clr-white);
+  letter-spacing: 0.1rem;
+}
+.arrow {
+  font-size: 4rem;
+  color: var(--clr-neutral-blue);
+  transform: rotate(180deg);
+  cursor: pointer;
 }
