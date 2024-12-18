@@ -96,3 +96,37 @@
   transform: rotate(180deg);
   cursor: pointer;
 }
+.chat {
+  width: 100%;
+  flex-grow: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4rem;
+}
+.chat__prompt,
+.chat__response {
+  max-width: 80%;
+  padding: 2rem;
+  font-size: 1.6rem;
+  color: var(--clr-white);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+}
+.chat__prompt {
+  background: linear-gradient(
+    135deg,
+    var(--clr-one-gradient),
+    var(--clr-two-gradient)
+  );
+  align-self: flex-end;
+  border-radius: 3rem 0 3rem 3rem;
+  text-align: right;
+}
+.chat__response {
+  background: linear-gradient(
+    135deg,
+    var(--clr-three-gradient),
+    var(--clr-four-gradient)
+  );
+  border-radius: 0 3rem 3rem 3rem;
+}
