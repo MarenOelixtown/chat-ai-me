@@ -1,8 +1,6 @@
 @import "../index.css";
 
 :root {
-  --clr-one-gradient: #f42f5f;
-  --clr-two-gradient: #8e25bf;
   --clr-neutral-white: #eee;
 }
 .start-page {

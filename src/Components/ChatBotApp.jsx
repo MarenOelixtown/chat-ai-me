@@ -9,17 +9,17 @@ const ChatBotApp = () => {
           <h2 id="title">Chat List</h2>
           <i className="bx bx-edit-alt new-chat" aria-label="Edit"></i>
         </div>
-        <div className="chat-list__item">
+        <div className="chat-list__item active">
           <h4>Chat 20/07/2024 12:59:42 PM</h4>
-          <i className="bx bx-x circle"></i>
+          <i className="bx bx-x-circle"></i>
         </div>
         <div className="chat-list__item">
           <h4>Chat 20/07/2024 12:59:42 PM</h4>
-          <i className="bx bx-x circle"></i>
+          <i className="bx bx-x-circle"></i>
         </div>
         <div className="chat-list__item">
           <h4>Chat 20/07/2024 12:59:42 PM</h4>
-          <i className="bx bx-x circle"></i>
+          <i className="bx bx-x-circle"></i>
         </div>
       </div>
       <div className="chat-window">

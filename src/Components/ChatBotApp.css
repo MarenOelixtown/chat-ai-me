@@ -2,7 +2,8 @@
 
 :root {
   --clr-neutral-very-dark: #0d111a;
-  --white: white;
+  --clr-neutral-white: #ddd;
+  --clr-white: #fff;
   --clr-neutral-green: #7b8e7b;
 }
 .chat-app {
@@ -46,4 +47,23 @@
   align-items: center;
   justify-content: space-between;
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+.chat-list__item.active {
+  background: linear-gradient(
+    135deg,
+    var(--clr-one-gradient),
+    var(--clr-two-gradient)
+  );
+}
+.chat-list__item h4 {
+  font-size: 1.6rem;
+  font-weight: var(--fw-light);
+  color: var(--clr-neutral-white);
+}
+.chat-list__item.active h4 {
+  color: var(--clr-white);
+}
+.chat-list__item i {
+  font-size: 2.5rem;
+  color: var(--clr-one-gradient);
 }

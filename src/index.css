@@ -80,8 +80,11 @@
 }
 :root {
   --clr-neutral-dark-blue: #131927;
+  --clr-one-gradient: #f42f5f;
+  --clr-two-gradient: #8e25bf;
   --ff-primary: "Outfit", sans-serif;
   --ff-secondary: "Exo 2", sans-serif;
+  --fw-light: 300;
 }
 html {
   box-sizing: border-box;
