@@ -130,3 +130,16 @@
   );
   border-radius: 0 3rem 3rem 3rem;
 }
+.chat__prompt span,
+.chat__response span {
+  font-family: var(--ff-secondary);
+  font-size: 1.4rem;
+  display: block;
+  margin-top: 0.5rem;
+}
+.chat__typing {
+  font-family: var(--ff-secondary);
+  font-size: 1.6rem;
+  color: var(--clr-neutral-blue);
+  margin-top: auto;
+}
