@@ -80,18 +80,23 @@
 }
 :root {
   --clr-neutral-dark-blue: #131927;
+  --clr-one-gradient: #f42f5f;
+  --clr-two-gradient: #8e25bf;
+  --clr-three-gradient: #fe8d5c;
+  --clr-four-gradient: #fe4d57;
+  --ff-primary: "Outfit", sans-serif;
+  --ff-secondary: "Exo 2", sans-serif;
+  --fw-light: 300;
 }
 html {
   box-sizing: border-box;
   font-size: 62.5%; /* 1rem = 10px */
 }
-*,
-*::before,
-*::after {
+* {
   box-sizing: inherit;
   margin: 0;
   padding: 0;
-  font-family: "Outfit", sans-serif;
+  font-family: var(--ff-primary);
 }
 .container {
   width: 100%;
