@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ChatBotApp.css";
 
-const ChatBotApp = ({ onGoBack }) => {
+const ChatBotApp = ({ onGoBack, chats, setChats }) => {
   /* const handleSubmitMessage = (event) => {
     console.log("clicked");
     event.preventDefault();
