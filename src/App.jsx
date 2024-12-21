@@ -8,6 +8,14 @@ const App = () => {
 
   const handleStartChat = () => {
     setIsChatting(true);
+
+    if (chats.length === 0) {
+      const newChat = {
+        id: "Chat ${new Date().toLocaleDateString('de-DE')} ${new Date().toLocaleTimeString()}",
+        messages: [],
+      };
+      setChats([newChat]);
+    }
   };
   const handleGoBack = () => {
     setIsChatting(false);
