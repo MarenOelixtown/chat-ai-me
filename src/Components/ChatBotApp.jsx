@@ -13,6 +13,31 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
   }; */
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
+
+  const handleInputChange = (event) => {
+    console.log(event.target.value);
+    setInputValue(event.target.value);
+  };
+  const sendMessage = () => {
+    console.log("clicked");
+    if (inputValue.trim === "") return;
+    const newMessage = {
+      type: "prompt",
+      text: inputValue,
+      timestamp: new Date().toLocaleTimeString(),
+    };
+    const updatedMessage = [...messages, newMessage];
+    console.log(updatedMessage);
+    setMessages(updatedMessage);
+    setInputValue("");
+    const updatedChats = chats.map((chat, index) => {
+      if (index === 0) {
+        return { ...chats, messages: updatedMessage };
+      }
+      return chats;
+    });
+    setChats(updatedChats);
+  };
   return (
     <div className="chat-app">
       <div className="chat-list">
@@ -57,15 +82,11 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
           <input
             id="message-form-input"
             type="text"
-            /* name="message" */
             className="message-form__input"
             placeholder="Type a message..."
-            /* onChange={(event) => event.target.elements} */
+            onChange={handleInputChange}
           />
-          <i
-            className="fa-solid fa-paper-plane"
-            /* onClick={handleSubmitMessage} */
-          ></i>
+          <i className="fa-solid fa-paper-plane" onClick={sendMessage}></i>
         </form>
       </div>
     </div>
