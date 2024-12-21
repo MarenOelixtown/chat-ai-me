@@ -11,7 +11,8 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
     console.log(newMessage);
     event.target.reset();
   }; */
-
+  const [inputValue, setInputValue] = useState("");
+  const [messages, setMessages] = useState(chats[0]?.messages || []);
   return (
     <div className="chat-app">
       <div className="chat-list">
