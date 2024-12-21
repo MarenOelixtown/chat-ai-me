@@ -1,7 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import "./ChatBotApp.css";
 
 const ChatBotApp = ({ onGoBack }) => {
+  /* const handleSubmitMessage = (event) => {
+    console.log("clicked");
+    event.preventDefault();
+    const formElements = event.target.elements;
+    console.log(formElements);
+    const newMessage = formElements.message.value;
+    console.log(newMessage);
+    event.target.reset();
+  }; */
+
   return (
     <div className="chat-app">
       <div className="chat-list">
@@ -46,10 +56,15 @@ const ChatBotApp = ({ onGoBack }) => {
           <input
             id="message-form-input"
             type="text"
+            /* name="message" */
             className="message-form__input"
             placeholder="Type a message..."
+            /* onChange={(event) => event.target.elements} */
           />
-          <i className="fa-solid fa-paper-plane"></i>
+          <i
+            className="fa-solid fa-paper-plane"
+            /* onClick={handleSubmitMessage} */
+          ></i>
         </form>
       </div>
     </div>

@@ -4,6 +4,7 @@ import ChatBotApp from "./Components/ChatBotApp";
 
 const App = () => {
   const [isChatting, setIsChatting] = useState(false);
+  const [chats, setChats] = useState([]);
 
   const handleStartChat = () => {
     setIsChatting(true);
