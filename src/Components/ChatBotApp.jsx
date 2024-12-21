@@ -2,15 +2,6 @@ import React, { useState } from "react";
 import "./ChatBotApp.css";
 
 const ChatBotApp = ({ onGoBack, chats, setChats }) => {
-  /* const handleSubmitMessage = (event) => {
-    console.log("clicked");
-    event.preventDefault();
-    const formElements = event.target.elements;
-    console.log(formElements);
-    const newMessage = formElements.message.value;
-    console.log(newMessage);
-    event.target.reset();
-  }; */
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
 
@@ -26,15 +17,16 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
       text: inputValue,
       timestamp: new Date().toLocaleTimeString(),
     };
-    const updatedMessage = [...messages, newMessage];
-    console.log(updatedMessage);
-    setMessages(updatedMessage);
+    const updatedMessages = [...messages, newMessage];
+    console.log(updatedMessages);
+    setMessages(updatedMessages);
     setInputValue("");
+
     const updatedChats = chats.map((chat, index) => {
       if (index === 0) {
-        return { ...chats, messages: updatedMessage };
+        return { ...chats, messages: updatedMessages };
       }
-      return chats;
+      return chat;
     });
     setChats(updatedChats);
   };
@@ -45,17 +37,16 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
           <h2 id="title">Chat List</h2>
           <i className="bx bx-edit-alt new-chat" aria-label="Edit"></i>
         </div>
-        <div className="chat-list__item active">
-          <h4>Chat 20/07/2024 12:59:42 PM</h4>
-          <i className="bx bx-x-circle"></i>
-        </div>
-        <div className="chat-list__item">
-          <h4>Chat 20/07/2024 12:59:42 PM</h4>
-          <i className="bx bx-x-circle"></i>
-        </div>
-        <div className="chat-list__item">
-          <h4>Chat 20/07/2024 12:59:42 PM</h4>
-          <i className="bx bx-x-circle"></i>
+        <div>
+          {chats.map((chat, index) => (
+            <div
+              key={chat.id}
+              className={`chat-list__item ${index === 0 ? "active" : ""}`}
+            >
+              <h4>{chat.id}</h4>
+              <i className="bx bx-x-circle"></i>
+            </div>
+          ))}
         </div>
       </div>
       <div className="chat-window">
