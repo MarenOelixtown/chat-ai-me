@@ -14,7 +14,7 @@ const ChatBotApp = ({
 
   useEffect(() => {
     const activeChatObject = chats.find((chat) => chat.id === activeChat);
-    setMessages(activeChatObject);
+    setMessages(activeChatObject ? activeChatObject.messages : []);
   }, [activeChat, chats]);
 
   const handleInputChange = (event) => {
