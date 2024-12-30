@@ -23,6 +23,17 @@ const App = () => {
   const handleGoBack = () => {
     setIsChatting(false);
   };
+  const createNewChat = () => {
+    const newChat = {
+      id: `Chat ${new Date().toLocaleDateString(
+        "de-DE"
+      )} ${new Date().toLocaleTimeString()}`,
+      messages: [],
+    };
+    setChats([newChat, ...chats]);
+    setActiveChat(newChat.id);
+  };
+
   return (
     <main className="container">
       {isChatting ? (
