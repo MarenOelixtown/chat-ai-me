@@ -34,26 +34,38 @@ const ChatBotApp = ({
     setMessages(updatedMessages);
     setInputValue("");
 
-    const updatedChats = chats.map((chat, index) => {
-      if (index === 0) {
+    const updatedChats = chats.map((chat) => {
+      if (chat.id === activeChat) {
         return { ...chat, messages: updatedMessages };
       }
       return chat;
     });
     setChats(updatedChats);
   };
+
+  const handleSelectChat = (id) => {
+    setActiveChat(id);
+  };
+
   return (
     <div className="chat-app">
       <div className="chat-list">
         <div className="chat-list__header">
           <h2 id="title">Chat List</h2>
-          <i className="bx bx-edit-alt new-chat" aria-label="Edit"></i>
+          <i
+            className="bx bx-edit-alt new-chat"
+            aria-label="Edit"
+            onClick={onNewChat}
+          ></i>
         </div>
         <div>
-          {chats.map((chat, index) => (
+          {chats.map((chat) => (
             <div
-              key={index}
-              className={`chat-list__item ${index === 0 ? "active" : ""}`}
+              onClick={() => handleSelectChat(chat.id)}
+              key={chat.id}
+              className={`chat-list__item ${
+                chat.id === activeChat ? "active" : ""
+              }`}
             >
               <h4>{chat.id}</h4>
               <i className="bx bx-x-circle"></i>
