@@ -46,6 +46,18 @@ const ChatBotApp = ({
   const handleSelectChat = (id) => {
     setActiveChat(id);
   };
+  const handleDeleteChat = (id) => {
+    const updateDeletedChats = chats.filter((chat) => chat.id !== id);
+
+    setChats(updateDeletedChats);
+
+    if (id === activeChat) {
+      const newActiveChat =
+        updateDeletedChats.length > 0 ? updateDeletedChats[0].id : null;
+      console.log(newActiveChat);
+      setActiveChat(newActiveChat);
+    }
+  };
 
   return (
     <div className="chat-app">
@@ -68,7 +80,13 @@ const ChatBotApp = ({
               }`}
             >
               <h4>{chat.date}</h4>
-              <i className="bx bx-x-circle"></i>
+              <i
+                className="bx bx-x-circle"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  handleDeleteChat(chat.id);
+                }}
+              ></i>
             </div>
           ))}
         </div>
