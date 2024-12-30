@@ -35,9 +35,29 @@
   font-size: 2rem;
   text-transform: uppercase;
 }
-.chat-list__header i {
-  font-size: 2.5rem;
+.button--reset {
+  border: none;
+  border-radius: 0.5rem;
+  background: transparent;
+  font: inherit;
+  padding: 1rem;
   cursor: pointer;
+}
+button:hover,
+button:focus {
+  background: var(--crl-neutral-dark);
+}
+
+button:active {
+  transform: scale(0.9);
+}
+.button__new-chat {
+  color: inherit;
+  font-size: 2.5rem;
+}
+.button__new-chat:hover,
+.button__new-chat:focus {
+  outline: 1px solid var(--clr-neutral-green);
 }
 .chat-list__item {
   width: 100%;
@@ -65,9 +85,14 @@
 .chat-list__item.active h4 {
   color: var(--clr-white);
 }
-.chat-list__item i {
+.button__delete {
   font-size: 2.5rem;
   color: var(--clr-one-gradient);
+}
+.button__delete:hover,
+.button__delete:focus {
+  outline: 1px solid var(--clr-one-gradient);
+  background: var(--clr-neutral-very-dark);
 }
 .chat-window {
   width: 70%;
@@ -153,13 +178,19 @@
   box-shadow: 0 -0.2rem 0.5rem rgba(0, 0, 0, 0.1);
   padding-right: 5rem;
 }
-.message-form i {
+.message-form__button {
   font-size: 2.5rem;
   color: var(--clr-neutral-blue);
   cursor: pointer;
+  margin: 0 5rem;
+}
+.message-form__button:hover,
+.message-form__button:focus {
+  outline: 1px solid var(--clr-neutral-blue);
+  background: var(--clr-neutral-very-dark);
 }
 .emoji {
-  width: 10rem;
+  width: 2.5rem;
   display: flex;
   justify-content: center;
 }

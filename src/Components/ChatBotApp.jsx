@@ -70,11 +70,14 @@ const ChatBotApp = ({
       <div className="chat-list">
         <div className="chat-list__header">
           <h2 id="title">Chat List</h2>
-          <i
-            className="bx bx-edit-alt new-chat"
-            aria-label="Edit"
+          <button
+            type="button"
+            className="button--reset button__new-chat"
+            aria-label="Add new Chat"
             onClick={() => onNewChat()}
-          ></i>
+          >
+            <span className="bx bx-edit-alt" aria-hidden="true"></span>
+          </button>
         </div>
         <div>
           {chats.map((chat) => (
@@ -86,13 +89,17 @@ const ChatBotApp = ({
               }`}
             >
               <h4>{chat.date}</h4>
-              <i
-                className="bx bx-x-circle"
+              <button
+                type="button"
+                className="button--reset button__delete"
+                aria-label={`Delete ${chat.date}`}
                 onClick={(event) => {
                   event.stopPropagation();
                   handleDeleteChat(chat.id);
                 }}
-              ></i>
+              >
+                <span className="bx bx-x-circle" aria-hidden="true"></span>
+              </button>
             </div>
           ))}
         </div>
@@ -121,7 +128,16 @@ const ChatBotApp = ({
           className="message-form"
           onSubmit={(event) => event.preventDefault()}
         >
-          <i className="fa-solid fa-face-smile emoji"></i>
+          <button
+            type="button"
+            className="button--reset message-form__button"
+            aria-label="Add emoji"
+          >
+            <span
+              className="fa-solid fa-face-smile emoji"
+              aria-hidden="true"
+            ></span>
+          </button>
           <label htmlFor="message-form-input" className="sr-only">
             Type a message
           </label>
@@ -133,7 +149,14 @@ const ChatBotApp = ({
             value={inputValue}
             onChange={handleInputChange}
           />
-          <i className="fa-solid fa-paper-plane" onClick={sendMessage}></i>
+          <button
+            type="button"
+            className="button--reset message-form__button"
+            aria-label="Send Chat-Message"
+            onClick={sendMessage}
+          >
+            <span className="fa-solid fa-paper-plane" aria-hidden="true"></span>
+          </button>
         </form>
       </div>
     </div>
