@@ -73,7 +73,7 @@ const ChatBotApp = ({
           <i
             className="bx bx-edit-alt new-chat"
             aria-label="Edit"
-            onClick={onNewChat}
+            onClick={() => onNewChat()}
           ></i>
         </div>
         <div>
