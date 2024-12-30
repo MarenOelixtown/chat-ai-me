@@ -40,7 +40,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
         <div>
           {chats.map((chat, index) => (
             <div
-              key={chat.id}
+              key={index}
               className={`chat-list__item ${index === 0 ? "active" : ""}`}
             >
               <h4>{chat.id}</h4>
@@ -55,14 +55,18 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
           <i className="bx bx-arrow-back arrow" onClick={onGoBack}></i>
         </div>
         <div className="chat">
-          <div className="chat__prompt">
-            Hi, hhow are you?<span>12:59:51 PM</span>
-          </div>
-          <div className="chat__response">
-            Hello! I'm just a omputer program, so I don't have feelings, but I'm
-            here and ready to assist you. How can I help today?
-            <span>12:59:52 PM</span>
-          </div>
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`${
+                message.type === "prompt" ? "chat__prompt" : "chat__response"
+              }`}
+            >
+              {message.text}
+              <span>{message.timestamp} PM</span>
+            </div>
+          ))}
+
           <div className="chat__typing">Typing...</div>
         </div>
         <form className="message-form">
@@ -75,6 +79,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
             type="text"
             className="message-form__input"
             placeholder="Type a message..."
+            value={inputValue}
             onChange={handleInputChange}
           />
           <i className="fa-solid fa-paper-plane" onClick={sendMessage}></i>
