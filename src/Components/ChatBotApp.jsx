@@ -24,7 +24,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
 
     const updatedChats = chats.map((chat, index) => {
       if (index === 0) {
-        return { ...chats, messages: updatedMessages };
+        return { ...chat, messages: updatedMessages };
       }
       return chat;
     });
@@ -63,7 +63,7 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
               }`}
             >
               {message.text}
-              <span>{message.timestamp} PM</span>
+              <span>{message.timestamp}</span>
             </div>
           ))}
 
