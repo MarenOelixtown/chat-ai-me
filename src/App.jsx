@@ -18,13 +18,21 @@ const App = () => {
   const handleGoBack = () => {
     setIsChatting(false);
   };
-  const createNewChat = () => {
+  const createNewChat = (initialMessage = "") => {
     const newChat = {
       id: uuidv4(),
       date: `Chat ${new Date().toLocaleDateString(
         "de-DE"
       )} ${new Date().toLocaleTimeString()}`,
-      messages: [],
+      messages: initialMessage
+        ? [
+            {
+              type: "prompt",
+              text: initialMessage,
+              timestamp: new Date().toLocaleTimeString(),
+            },
+          ]
+        : [],
     };
     setChats([newChat, ...chats]);
     setActiveChat(newChat.id);
