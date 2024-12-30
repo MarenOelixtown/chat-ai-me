@@ -1,9 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ChatBotApp.css";
 
-const ChatBotApp = ({ onGoBack, chats, setChats }) => {
+const ChatBotApp = ({
+  onGoBack,
+  chats,
+  setChats,
+  activeChat,
+  setActiveChat,
+  onNewChat,
+}) => {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
+
+  useEffect(() => {
+    const activeChatObject = chats.find((chat) => chat.id === activeChat);
+    setMessages(activeChatObject);
+  }, [activeChat, chats]);
 
   const handleInputChange = (event) => {
     console.log(event.target.value);

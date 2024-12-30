@@ -31,7 +31,14 @@ const App = () => {
   return (
     <main className="container">
       {isChatting ? (
-        <ChatBotApp onGoBack={handleGoBack} chats={chats} setChats={setChats} />
+        <ChatBotApp
+          onGoBack={handleGoBack}
+          chats={chats}
+          setChats={setChats}
+          activeChat={activeChat}
+          setActiveChat={setActiveChat}
+          onNewChat={createNewChat}
+        />
       ) : (
         <ChatBotStart onStartChat={handleStartChat} />
       )}
