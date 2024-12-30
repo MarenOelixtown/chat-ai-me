@@ -69,7 +69,10 @@ const ChatBotApp = ({ onGoBack, chats, setChats }) => {
 
           <div className="chat__typing">Typing...</div>
         </div>
-        <form className="message-form">
+        <form
+          className="message-form"
+          onSubmit={(event) => event.preventDefault()}
+        >
           <i className="fa-solid fa-face-smile emoji"></i>
           <label htmlFor="message-form-input" className="sr-only">
             Type a message
