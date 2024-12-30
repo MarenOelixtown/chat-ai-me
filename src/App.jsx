@@ -20,7 +20,7 @@ const App = () => {
   };
   const createNewChat = () => {
     const newChat = {
-      id: `${uuidv4()}`,
+      id: uuidv4(),
       date: `Chat ${new Date().toLocaleDateString(
         "de-DE"
       )} ${new Date().toLocaleTimeString()}`,

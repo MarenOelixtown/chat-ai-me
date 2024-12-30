@@ -67,7 +67,7 @@ const ChatBotApp = ({
                 chat.id === activeChat ? "active" : ""
               }`}
             >
-              <h4>{chat.id}</h4>
+              <h4>{chat.date}</h4>
               <i className="bx bx-x-circle"></i>
             </div>
           ))}
