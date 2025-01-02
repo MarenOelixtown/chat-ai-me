@@ -107,7 +107,13 @@ const ChatBotApp = ({
       <div className="chat-window">
         <div className="chat-title">
           <h3>Chat with AI</h3>
-          <i className="bx bx-arrow-back arrow" onClick={onGoBack}></i>
+          <button
+            className="button--reset button__close"
+            aria-label="Close Chat AI"
+            onClick={onGoBack}
+          >
+            <span className="bx bx-arrow-back arrow" aria-hidden="true"></span>
+          </button>
         </div>
         <div className="chat">
           {messages.map((message, index) => (

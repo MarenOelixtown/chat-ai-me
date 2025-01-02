@@ -116,11 +116,14 @@ button:active {
   color: var(--clr-white);
   letter-spacing: 0.1rem;
 }
+.button__close:hover,
+.button__close:focus {
+  outline: 1px solid var(--clr-neutral-blue);
+}
 .arrow {
   font-size: 4rem;
   color: var(--clr-neutral-blue);
   transform: rotate(180deg);
-  cursor: pointer;
 }
 .chat {
   width: 100%;
