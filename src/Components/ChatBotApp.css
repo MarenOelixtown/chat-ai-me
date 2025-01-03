@@ -85,6 +85,7 @@ button:active {
 .chat-list__item.active h4 {
   color: var(--clr-white);
 }
+
 .button__delete {
   font-size: 2.5rem;
   color: var(--clr-one-gradient);

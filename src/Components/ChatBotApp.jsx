@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./ChatBotApp.css";
 
 const ChatBotApp = ({
@@ -11,11 +11,18 @@ const ChatBotApp = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
+  const [chatFocus, setChatFocus] = useState("");
+  const chatRefs = useRef([]); // needed for handleKeyDown, to enable keyboard-focus
 
   useEffect(() => {
     const activeChatObject = chats.find((chat) => chat.id === activeChat);
     setMessages(activeChatObject ? activeChatObject.messages : []);
   }, [activeChat, chats]);
+
+  useEffect(() => {
+    // Synchronize the length of the chatRefs array with the length of chats
+    chatRefs.current = chatRefs.current.slice(0, chats.length);
+  }, [chats]);
 
   const handleInputChange = (event) => {
     console.log(event.target.value);
@@ -52,6 +59,24 @@ const ChatBotApp = ({
   const handleSelectChat = (id) => {
     setActiveChat(id);
   };
+
+  const handleKeyDown = (event, index) => {
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      const nextIndex = (index + 1) % chats.length; // Cyclic navigation
+      setChatFocus(chats[nextIndex].id);
+      chatRefs.current[nextIndex]?.focus();
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      const prevIndex = (index - 1 + chats.length) % chats.length; // Cyclic navigation
+      setChatFocus(chats[prevIndex].id);
+      chatRefs.current[prevIndex]?.focus();
+    } else if (event.key === "Enter") {
+      event.preventDefault();
+      handleSelectChat(chats[index].id);
+    }
+  };
+
   const handleDeleteChat = (id) => {
     const updateDeletedChats = chats.filter((chat) => chat.id !== id);
 
@@ -67,9 +92,9 @@ const ChatBotApp = ({
 
   return (
     <div className="chat-app">
-      <div className="chat-list">
+      <section className="chat-list" aria-labelledby="chatlist-title">
         <div className="chat-list__header">
-          <h2 id="title">Chat List</h2>
+          <h2 id="chatlist-title">Chat List</h2>
           <button
             type="button"
             className="button--reset button__new-chat"
@@ -79,14 +104,28 @@ const ChatBotApp = ({
             <span className="bx bx-edit-alt" aria-hidden="true"></span>
           </button>
         </div>
-        <div>
-          {chats.map((chat) => (
-            <div
-              onClick={() => handleSelectChat(chat.id)}
+        <ul
+          role="listbox"
+          tabIndex="0"
+          aria-labelledby="chatlist-box"
+          onKeyDown={(event) => {
+            const focusedIndex = chats.findIndex(
+              (chat) => chat.id === chatFocus
+            );
+            handleKeyDown(event, focusedIndex);
+          }}
+        >
+          {chats.map((chat, index) => (
+            <li
               key={chat.id}
+              ref={(el) => (chatRefs.current[index] = el)}
               className={`chat-list__item ${
                 chat.id === activeChat ? "active" : ""
               }`}
+              role="option"
+              aria-selected={`${chat.id === activeChat ? "true" : "false"}`}
+              onClick={() => handleSelectChat(chat.id)}
+              tabIndex={chat.id === chatFocus ? 0 : -1}
             >
               <h4>{chat.date}</h4>
               <button
@@ -97,13 +136,20 @@ const ChatBotApp = ({
                   event.stopPropagation();
                   handleDeleteChat(chat.id);
                 }}
+                onKeyDown={(event) => {
+                  // onKeyDown function explicitly checks whether the Enter key has been pressed and executes the delete behavior.
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    handleDeleteChat(chat.id);
+                  }
+                }}
               >
                 <span className="bx bx-x-circle" aria-hidden="true"></span>
               </button>
-            </div>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+      </section>
       <div className="chat-window">
         <div className="chat-title">
           <h3>Chat with AI</h3>
