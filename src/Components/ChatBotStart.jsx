@@ -4,7 +4,7 @@ import "./ChatBotStart.css";
 const ChatBotStart = ({ onStartChat }) => {
   return (
     <div className="start-page">
-      <button className="start-page__btn" onClick={onStartChat}>
+      <button type="button" className="start-page__btn" onClick={onStartChat}>
         <span className="sr-only">Start</span>Chat AI
       </button>
     </div>
