@@ -133,6 +133,10 @@ button:active {
   display: flex;
   flex-direction: column;
   row-gap: 4rem;
+  overflow-y: auto;
+}
+.chat::-webkit-scrollbar {
+  display: none;
 }
 .chat__prompt,
 .chat__response {
