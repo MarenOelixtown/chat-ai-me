@@ -10,10 +10,11 @@ const ChatBotApp = ({
   onNewChat,
 }) => {
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-  console.log("API Key:", apiKey);
+
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
   const [chatFocus, setChatFocus] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
   const chatRefs = useRef([]); // needed for handleKeyDown, to enable keyboard-focus
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const ChatBotApp = ({
         return chat;
       });
       setChats(updatedChats);
+      setIsTyping(true);
 
       const response = await fetch(
         "https://api.openai.com/v1/chat/completions",
@@ -82,6 +84,7 @@ const ChatBotApp = ({
       };
       const updatedMessagesWithResponse = [...updatedMessages, newResponse];
       setMessages(updatedMessagesWithResponse);
+      setIsTyping(false);
 
       const updatedChatswithResponse = chats.map((chat) => {
         if (chat.id === activeChat) {
@@ -210,8 +213,7 @@ const ChatBotApp = ({
               <span>{message.timestamp}</span>
             </div>
           ))}
-
-          <div className="chat__typing">Typing...</div>
+          {isTyping && <div className="chat__typing">Typing...</div>}
         </div>
         <form
           className="message-form"
