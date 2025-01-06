@@ -133,6 +133,10 @@ button:active {
   display: flex;
   flex-direction: column;
   row-gap: 4rem;
+  overflow-y: auto;
+}
+.chat::-webkit-scrollbar {
+  display: none;
 }
 .chat__prompt,
 .chat__response {
@@ -172,10 +176,11 @@ button:active {
   font-size: 1.6rem;
   color: var(--clr-neutral-blue);
   margin-top: auto;
+  margin-bottom: -3rem;
 }
 .message-form {
   width: 100%;
-  height: 10rem;
+  min-height: 10rem;
   background-color: var(--crl-neutral-dark);
   display: flex;
   align-items: center;

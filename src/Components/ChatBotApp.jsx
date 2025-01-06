@@ -9,9 +9,13 @@ const ChatBotApp = ({
   setActiveChat,
   onNewChat,
 }) => {
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
   const [chatFocus, setChatFocus] = useState("");
+  const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef(null);
   const chatRefs = useRef([]); // needed for handleKeyDown, to enable keyboard-focus
 
   useEffect(() => {
@@ -24,11 +28,15 @@ const ChatBotApp = ({
     chatRefs.current = chatRefs.current.slice(0, chats.length);
   }, [chats]);
 
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
   const handleInputChange = (event) => {
     console.log(event.target.value);
     setInputValue(event.target.value);
   };
-  const sendMessage = () => {
+  const sendMessage = async () => {
     console.log("clicked");
     if (inputValue.trim === "") return;
     const newMessage = {
@@ -53,6 +61,43 @@ const ChatBotApp = ({
         return chat;
       });
       setChats(updatedChats);
+      setIsTyping(true);
+
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: inputValue }],
+            max_tokens: 500,
+          }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      const chatResponse = data.choices[0].message.content.trim();
+
+      const newResponse = {
+        type: "response",
+        text: chatResponse,
+        timestamp: new Date().toLocaleTimeString(),
+      };
+      const updatedMessagesWithResponse = [...updatedMessages, newResponse];
+      setMessages(updatedMessagesWithResponse);
+      setIsTyping(false);
+
+      const updatedChatswithResponse = chats.map((chat) => {
+        if (chat.id === activeChat) {
+          return { ...chat, messages: updatedMessagesWithResponse };
+        }
+        return chat;
+      });
+      setChats(updatedChatswithResponse);
     }
   };
 
@@ -173,8 +218,8 @@ const ChatBotApp = ({
               <span>{message.timestamp}</span>
             </div>
           ))}
-
-          <div className="chat__typing">Typing...</div>
+          {isTyping && <div className="chat__typing">Typing...</div>}
+          <div ref={chatEndRef}></div>
         </div>
         <form
           className="message-form"
