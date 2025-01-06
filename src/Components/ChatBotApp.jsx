@@ -9,6 +9,8 @@ const ChatBotApp = ({
   setActiveChat,
   onNewChat,
 }) => {
+  const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  console.log("API Key:", apiKey);
   const [inputValue, setInputValue] = useState("");
   const [messages, setMessages] = useState(chats[0]?.messages || []);
   const [chatFocus, setChatFocus] = useState("");
