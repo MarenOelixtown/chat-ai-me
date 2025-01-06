@@ -15,6 +15,7 @@ const ChatBotApp = ({
   const [messages, setMessages] = useState(chats[0]?.messages || []);
   const [chatFocus, setChatFocus] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const chatEndRef = useRef(null);
   const chatRefs = useRef([]); // needed for handleKeyDown, to enable keyboard-focus
 
   useEffect(() => {
@@ -26,6 +27,10 @@ const ChatBotApp = ({
     // Synchronize the length of the chatRefs array with the length of chats
     chatRefs.current = chatRefs.current.slice(0, chats.length);
   }, [chats]);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   const handleInputChange = (event) => {
     console.log(event.target.value);
@@ -214,6 +219,7 @@ const ChatBotApp = ({
             </div>
           ))}
           {isTyping && <div className="chat__typing">Typing...</div>}
+          <div ref={chatEndRef}></div>
         </div>
         <form
           className="message-form"
