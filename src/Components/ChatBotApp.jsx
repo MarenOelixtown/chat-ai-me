@@ -153,6 +153,7 @@ const ChatBotApp = ({
           role="listbox"
           tabIndex="0"
           aria-labelledby="chatlist-box"
+          aria-live="polite"
           onKeyDown={(event) => {
             const focusedIndex = chats.findIndex(
               (chat) => chat.id === chatFocus
@@ -176,7 +177,7 @@ const ChatBotApp = ({
               <button
                 type="button"
                 className="button--reset button__delete"
-                aria-label={`Delete ${chat.date}`}
+                aria-label="Delete Chat"
                 onClick={(event) => {
                   event.stopPropagation();
                   handleDeleteChat(chat.id);
@@ -206,7 +207,7 @@ const ChatBotApp = ({
             <span className="bx bx-arrow-back arrow" aria-hidden="true"></span>
           </button>
         </div>
-        <div className="chat">
+        <div className="chat" aria-live="polite" aria-busy={isTyping}>
           {messages.map((message, index) => (
             <div
               key={index}
@@ -214,8 +215,15 @@ const ChatBotApp = ({
                 message.type === "prompt" ? "chat__prompt" : "chat__response"
               }`}
             >
-              {message.text}
-              <span>{message.timestamp}</span>
+              <p>
+                <span className="sr-only">{`${message.timestamp} ${
+                  message.type === "prompt"
+                    ? "User wrote: "
+                    : "Chatbot answers: "
+                }`}</span>
+                {message.text}
+              </p>
+              <span aria-hidden="true">{message.timestamp}</span>
             </div>
           ))}
           {isTyping && <div className="chat__typing">Typing...</div>}
@@ -236,7 +244,7 @@ const ChatBotApp = ({
             ></span>
           </button>
           <label htmlFor="message-form-input" className="sr-only">
-            Type a message
+            Chat inputfield
           </label>
           <input
             id="message-form-input"
