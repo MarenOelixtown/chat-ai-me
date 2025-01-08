@@ -206,7 +206,7 @@ button:active {
   outline: 1px solid var(--clr-neutral-blue);
   background: var(--clr-neutral-very-dark);
 }
-.emoji {
+.microphone {
   width: 2.5rem;
   display: flex;
   justify-content: center;

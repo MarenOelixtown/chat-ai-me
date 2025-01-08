@@ -236,10 +236,10 @@ const ChatBotApp = ({
           <button
             type="button"
             className="button--reset message-form__button"
-            aria-label="Add emoji"
+            aria-label="Add voice input"
           >
             <span
-              className="fa-solid fa-face-smile emoji"
+              className="fa-solid fa-microphone microphone"
               aria-hidden="true"
             ></span>
           </button>
