@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 import "./ChatBotApp.css";
 
 const ChatBotApp = ({
@@ -15,6 +18,12 @@ const ChatBotApp = ({
   const [messages, setMessages] = useState(chats[0]?.messages || []);
   const [chatFocus, setChatFocus] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const {
+    transcript,
+    listening,
+    browserSupportsSpeechRecognition,
+    isMicrophoneAvailable,
+  } = useSpeechRecognition();
   const chatEndRef = useRef(null);
   const chatRefs = useRef([]); // needed for handleKeyDown, to enable keyboard-focus
 
@@ -135,6 +144,14 @@ const ChatBotApp = ({
     }
   };
 
+  const handleSpeachToText = async () => {
+    await SpeechRecognition.startListening({ language: "en-GB" });
+    console.log(transcript);
+  };
+  useEffect(() => {
+    setInputValue(transcript);
+  }, [transcript]);
+
   return (
     <div className="chat-app">
       <section className="chat-list" aria-labelledby="chatlist-title">
@@ -227,19 +244,33 @@ const ChatBotApp = ({
             </div>
           ))}
           {isTyping && <div className="chat__typing">Typing...</div>}
+
           <div ref={chatEndRef}></div>
         </div>
         <form
           className="message-form"
           onSubmit={(event) => event.preventDefault()}
         >
+          {!isMicrophoneAvailable && (
+            <div className="microphone-error">
+              Microphone access is needed for this feature!
+            </div>
+          )}
+          {!browserSupportsSpeechRecognition && (
+            <div className="microphone-error">
+              Sorry, your browser did not support speach recognition!
+            </div>
+          )}
           <button
             type="button"
             className="button--reset message-form__button"
-            aria-label="Add voice input"
+            aria-label="Voice input: new message"
+            onClick={handleSpeachToText}
           >
             <span
-              className="fa-solid fa-microphone microphone"
+              className={`fa-solid fa-microphone microphone ${
+                listening && "microphone--active"
+              }`}
               aria-hidden="true"
             ></span>
           </button>
