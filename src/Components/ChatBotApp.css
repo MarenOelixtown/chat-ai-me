@@ -197,28 +197,48 @@ button:active {
   position: relative;
 }
 .message-form__button {
+  display: flex;
+  justify-content: space-between;
   font-size: 2.5rem;
   color: var(--clr-neutral-blue);
   cursor: pointer;
   margin: 0 5rem;
 }
+
 .message-form__button:hover,
 .message-form__button:focus {
   outline: 1px solid var(--clr-neutral-blue);
   background: var(--clr-neutral-very-dark);
+}
+.microphone__disabled {
+  position: relative;
 }
 .microphone {
   width: 2.5rem;
   display: flex;
   justify-content: center;
 }
-.microphone-error {
+.circle {
+  font-size: 1.5rem;
+}
+
+.microphone__error {
+  position: absolute;
+  display: flex;
+  text-align: center;
+  top: -10rem;
+  left: -10rem;
+  max-width: 16rem;
   font-family: var(--ff-secondary);
   font-size: 1.6rem;
-  color: red;
-  position: absolute;
-  bottom: 1rem;
-  left: 1rem;
+  overflow: hidden;
+  color: var(--clr-neutral-very-dark);
+  background: var(--clr-neutral-blue);
+  border-radius: 3rem 3rem 0 3rem;
+  padding: 1.5rem;
+}
+[aria-expanded="false"] + .microphone__error {
+  display: none;
 }
 .microphone--active {
   color: red;

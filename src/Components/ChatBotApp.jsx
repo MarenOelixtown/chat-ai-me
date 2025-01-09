@@ -18,6 +18,7 @@ const ChatBotApp = ({
   const [messages, setMessages] = useState(chats[0]?.messages || []);
   const [chatFocus, setChatFocus] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
   const {
     transcript,
     listening,
@@ -144,13 +145,28 @@ const ChatBotApp = ({
     }
   };
 
-  const handleSpeachToText = async () => {
+  const handleSpeechToText = async () => {
     await SpeechRecognition.startListening({ language: "en-GB" });
     console.log(transcript);
   };
   useEffect(() => {
     setInputValue(transcript);
   }, [transcript]);
+
+  let microphoneErrorMessage = "";
+
+  if (browserSupportsSpeechRecognition && isMicrophoneAvailable) {
+    microphoneErrorMessage =
+      "Sorry, your browser did not support speech recognition!";
+  } else if (!browserSupportsSpeechRecognition) {
+    microphoneErrorMessage =
+      "Sorry, your browser did not support speech recognition!";
+  } else if (isMicrophoneAvailable) {
+    microphoneErrorMessage = "Microphone access is needed!";
+  }
+  const toggleMicrophoneError = () => {
+    setIsExpanded((prev) => !prev);
+  };
 
   return (
     <div className="chat-app">
@@ -213,7 +229,7 @@ const ChatBotApp = ({
           ))}
         </ul>
       </section>
-      <div className="chat-window">
+      <section className="chat-window" aria-labelledby="chat-window">
         <div className="chat-title">
           <h3>Chat with AI</h3>
           <button
@@ -251,29 +267,45 @@ const ChatBotApp = ({
           className="message-form"
           onSubmit={(event) => event.preventDefault()}
         >
-          {!isMicrophoneAvailable && (
-            <div className="microphone-error">
-              Microphone access is needed for this feature!
+          {isMicrophoneAvailable || browserSupportsSpeechRecognition ? (
+            <div className="microphone__disabled">
+              <button
+                type="button"
+                className="button--reset message-form__button"
+                aria-label="Voice input disabled: Open info"
+                aria-controls="error-message"
+                aria-expanded={isExpanded}
+                onClick={toggleMicrophoneError}
+              >
+                <span
+                  className="fa-solid fa-microphone-slash microphone"
+                  aria-hidden="true"
+                ></span>
+                <span
+                  className="fa-solid fa-circle-info microphone circle"
+                  aria-hidden="true"
+                ></span>
+              </button>
+              <div className="microphone__error" id="error-message">
+                <p>{microphoneErrorMessage}</p>
+              </div>
             </div>
+          ) : (
+            <button
+              type="button"
+              className="button--reset message-form__button"
+              aria-label="Start voice input: new message"
+              onClick={handleSpeechToText}
+            >
+              <span
+                className={`fa-solid fa-microphone microphone ${
+                  listening && "microphone--active"
+                }`}
+                aria-hidden="true"
+              ></span>
+            </button>
           )}
-          {!browserSupportsSpeechRecognition && (
-            <div className="microphone-error">
-              Sorry, your browser did not support speach recognition!
-            </div>
-          )}
-          <button
-            type="button"
-            className="button--reset message-form__button"
-            aria-label="Voice input: new message"
-            onClick={handleSpeachToText}
-          >
-            <span
-              className={`fa-solid fa-microphone microphone ${
-                listening && "microphone--active"
-              }`}
-              aria-hidden="true"
-            ></span>
-          </button>
+
           <label htmlFor="message-form-input" className="sr-only">
             Chat inputfield
           </label>
@@ -294,7 +326,7 @@ const ChatBotApp = ({
             <span className="fa-solid fa-paper-plane" aria-hidden="true"></span>
           </button>
         </form>
-      </div>
+      </section>
     </div>
   );
 };
