@@ -147,7 +147,6 @@ const ChatBotApp = ({
 
   const handleSpeechToText = async () => {
     await SpeechRecognition.startListening({ language: "en-GB" });
-    console.log(transcript);
   };
   useEffect(() => {
     setInputValue(transcript);
@@ -155,7 +154,7 @@ const ChatBotApp = ({
 
   let microphoneErrorMessage = "";
 
-  if (browserSupportsSpeechRecognition && isMicrophoneAvailable) {
+  if (!browserSupportsSpeechRecognition && !isMicrophoneAvailable) {
     microphoneErrorMessage =
       "Sorry, your browser did not support speech recognition!";
   } else if (!browserSupportsSpeechRecognition) {
@@ -267,7 +266,7 @@ const ChatBotApp = ({
           className="message-form"
           onSubmit={(event) => event.preventDefault()}
         >
-          {isMicrophoneAvailable || browserSupportsSpeechRecognition ? (
+          {!isMicrophoneAvailable || !browserSupportsSpeechRecognition ? (
             <div className="microphone__disabled">
               <button
                 type="button"

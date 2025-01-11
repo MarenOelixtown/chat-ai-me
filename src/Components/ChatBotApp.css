@@ -244,13 +244,14 @@ button:active {
   color: red;
 }
 .message-form__input {
-  height: 100%;
+  height: 50%;
   flex-grow: 1;
   background-color: transparent;
   border: none;
+  border-bottom: 2px solid var(--clr-neutral-blue);
   font-size: 1.8rem;
   color: var(--clr-neutral-blue);
-  margin: 0 1rem 1rem 0;
+  margin: 0 1rem 2rem 0;
 }
 .message-form__input::placeholder {
   font-size: 1.8rem;
