@@ -160,9 +160,10 @@ const ChatBotApp = ({
   } else if (!browserSupportsSpeechRecognition) {
     microphoneErrorMessage =
       "Sorry, your browser did not support speech recognition!";
-  } else if (isMicrophoneAvailable) {
+  } else if (!isMicrophoneAvailable) {
     microphoneErrorMessage = "Microphone access is needed!";
   }
+
   const toggleMicrophoneError = () => {
     setIsExpanded((prev) => !prev);
   };
