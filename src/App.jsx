@@ -1,3 +1,4 @@
+import "regenerator-runtime";
 import React, { useState } from "react";
 import ChatBotStart from "./Components/ChatBotStart";
 import ChatBotApp from "./Components/ChatBotApp";
