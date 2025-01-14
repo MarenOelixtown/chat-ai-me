@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -15,7 +16,10 @@ const ChatBotApp = ({
   const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
 
   const [inputValue, setInputValue] = useState("");
-  const [messages, setMessages] = useState(chats[0]?.messages || []);
+  /* const [messages, setMessages] = useState(chats[0]?.messages || []); */
+  const [messages, setMessages] = useLocalStorageState("messages", {
+    defaultValue: chats[0]?.messages || [],
+  });
   const [chatFocus, setChatFocus] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);

@@ -1,13 +1,18 @@
 import "regenerator-runtime";
 import React, { useState } from "react";
+import useLocalStorageState from "use-local-storage-state";
 import ChatBotStart from "./Components/ChatBotStart";
 import ChatBotApp from "./Components/ChatBotApp";
 import { v4 as uuidv4 } from "uuid";
 
 const App = () => {
   const [isChatting, setIsChatting] = useState(false);
-  const [chats, setChats] = useState([]);
-  const [activeChat, setActiveChat] = useState(null);
+  /* const [chats, setChats] = useState([]); */
+  const [chats, setChats] = useLocalStorageState("chats", { defaultValue: [] });
+  /* const [activeChat, setActiveChat] = useState(null); */
+  const [activeChat, setActiveChat] = useLocalStorageState("activeChat", {
+    defaultValue: null,
+  });
 
   const handleStartChat = () => {
     setIsChatting(true);
