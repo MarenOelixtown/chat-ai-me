@@ -137,7 +137,7 @@ const ChatBotApp = ({
           ...prevMessages,
           {
             type: "error",
-            text: `An error occurred: ${error.message}`,
+            text: `Unable to reach Chat AI - An error occurred: ${error.message}`,
             timestamp: new Date().toLocaleTimeString(),
           },
         ]);
