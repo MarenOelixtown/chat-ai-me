@@ -99,7 +99,7 @@ const ChatBotApp = ({
             ...prevMessages,
             {
               type: "error",
-              text: `An error from openAI occurred: ${response.statusText} (${response.status})`,
+              text: `Chat AI is currently not available. An error from openAI occurred: ${response.statusText} (${response.status})`,
               timestamp: new Date().toLocaleTimeString(),
             },
           ]);
@@ -111,7 +111,9 @@ const ChatBotApp = ({
         console.log(data);
         const chatResponse = data.choices[0].message.content.trim();
         if (!chatResponse) {
-          throw new Error("No response content from the API.");
+          throw new Error(
+            "Chat AI response is broken and cannot be displayed."
+          );
         }
 
         const newResponse = {
@@ -279,14 +281,20 @@ const ChatBotApp = ({
             <div
               key={index}
               className={`${
-                message.type === "prompt" ? "chat__prompt" : "chat__response"
+                message.type === "prompt"
+                  ? "chat__prompt"
+                  : message.type === "response"
+                  ? "chat__response"
+                  : "chat__error"
               }`}
             >
               <p>
                 <span className="sr-only">{`${message.timestamp} ${
                   message.type === "prompt"
                     ? "User wrote: "
-                    : "Chatbot answers: "
+                    : message.type === "response"
+                    ? "Chatbot answers: "
+                    : "Error: "
                 }`}</span>
                 {message.text}
               </p>
