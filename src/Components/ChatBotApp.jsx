@@ -273,6 +273,7 @@ const ChatBotApp = ({
         <div className="chat-title">
           <h3 className="chat-title__heading">Chat with AI</h3>
           <button
+            type="button"
             className="button--reset button__menu"
             aria-label="Open Chatlist"
             onClick={() => setShowChatList(true)}
@@ -280,6 +281,7 @@ const ChatBotApp = ({
             <span className="bx bx-menu" aria-hidden="true"></span>
           </button>
           <button
+            type="button"
             className="button--reset button__close"
             aria-label="Close Chat AI"
             onClick={onGoBack}
