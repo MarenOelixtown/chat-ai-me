@@ -77,41 +77,71 @@ const ChatBotApp = ({
       setChats(updatedChats);
       setIsTyping(true);
 
-      const response = await fetch(
-        "https://api.openai.com/v1/chat/completions",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
+      try {
+        const response = await fetch(
+          "https://api.openai.com/v1/chat/completions",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${apiKey}`,
+            },
+            body: JSON.stringify({
+              model: "gpt-3.5-turbo",
+              messages: [{ role: "user", content: inputValue }],
+              max_tokens: 500,
+            }),
+          }
+        );
+        console.log(response);
+        if (!response.ok) {
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            {
+              type: "error",
+              text: `An error from openAI occurred: ${response.statusText} (${response.status})`,
+              timestamp: new Date().toLocaleTimeString(),
+            },
+          ]);
+          setIsTyping(false);
+          return;
+        }
+
+        const data = await response.json();
+        console.log(data);
+        const chatResponse = data.choices[0].message.content.trim();
+        if (!chatResponse) {
+          throw new Error("No response content from the API.");
+        }
+
+        const newResponse = {
+          type: "response",
+          text: chatResponse,
+          timestamp: new Date().toLocaleTimeString(),
+        };
+        const updatedMessagesWithResponse = [...updatedMessages, newResponse];
+        setMessages(updatedMessagesWithResponse);
+        setIsTyping(false);
+
+        const updatedChatswithResponse = chats.map((chat) => {
+          if (chat.id === activeChat) {
+            return { ...chat, messages: updatedMessagesWithResponse };
+          }
+          return chat;
+        });
+        setChats(updatedChatswithResponse);
+      } catch (error) {
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          {
+            type: "error",
+            text: `An error occurred: ${error.message}`,
+            timestamp: new Date().toLocaleTimeString(),
           },
-          body: JSON.stringify({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: inputValue }],
-            max_tokens: 500,
-          }),
-        }
-      );
-      const data = await response.json();
-      console.log(data);
-      const chatResponse = data.choices[0].message.content.trim();
-
-      const newResponse = {
-        type: "response",
-        text: chatResponse,
-        timestamp: new Date().toLocaleTimeString(),
-      };
-      const updatedMessagesWithResponse = [...updatedMessages, newResponse];
-      setMessages(updatedMessagesWithResponse);
-      setIsTyping(false);
-
-      const updatedChatswithResponse = chats.map((chat) => {
-        if (chat.id === activeChat) {
-          return { ...chat, messages: updatedMessagesWithResponse };
-        }
-        return chat;
-      });
-      setChats(updatedChatswithResponse);
+        ]);
+      } finally {
+        setIsTyping(false);
+      }
     }
   };
 
