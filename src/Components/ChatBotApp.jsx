@@ -221,6 +221,14 @@ const ChatBotApp = ({
           >
             <span className="bx bx-edit-alt" aria-hidden="true"></span>
           </button>
+          <button
+            type="button"
+            className="button--reset button__close-chatlist"
+            aria-label="Close Chatlist"
+            onClick={() => setShowChatList(false)}
+          >
+            <span className="bx bx-x-circle" aria-hidden="true"></span>
+          </button>
         </div>
         <ul
           role="listbox"

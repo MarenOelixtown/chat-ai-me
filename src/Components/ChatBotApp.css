@@ -298,4 +298,8 @@ button:active {
     display: block;
     position: absolute;
   }
+  .button__close-chatlist {
+    font-size: 2.5rem;
+    color: var(--clr-neutral-green);
+  }
 }
