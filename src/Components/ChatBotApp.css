@@ -147,7 +147,8 @@ button:active {
   display: none;
 }
 .chat__prompt,
-.chat__response {
+.chat__response,
+.chat__error {
   max-width: 80%;
   padding: 2rem;
   font-size: 1.6rem;
@@ -172,8 +173,15 @@ button:active {
   );
   border-radius: 0 3rem 3rem 3rem;
 }
+.chat__error {
+  border: 1px solid red;
+  border-radius: 0 3rem 3rem 3rem;
+  color: var(--clr-neutral-very-dark);
+  background: var(--clr-neutral-blue);
+}
 .chat__prompt span,
-.chat__response span {
+.chat__response span,
+.chat__error span {
   font-family: var(--ff-secondary);
   font-size: 1.4rem;
   display: block;
