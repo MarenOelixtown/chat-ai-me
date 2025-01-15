@@ -207,7 +207,10 @@ const ChatBotApp = ({
 
   return (
     <div className="chat-app">
-      <section className="chat-list" aria-labelledby="chatlist-title">
+      <section
+        className={`chat-list ${showChatList ? "chat-list--show" : ""}`}
+        aria-labelledby="chatlist-title"
+      >
         <div className="chat-list__header">
           <h2 id="chatlist-title">Chat List</h2>
           <button
@@ -268,7 +271,7 @@ const ChatBotApp = ({
       </section>
       <section className="chat-window" aria-labelledby="chat-window">
         <div className="chat-title">
-          <h3>Chat with AI</h3>
+          <h3 className="chat-title__heading">Chat with AI</h3>
           <button
             className="button--reset button__menu"
             aria-label="Open Chatlist"

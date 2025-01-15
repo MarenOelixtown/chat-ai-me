@@ -281,9 +281,16 @@ button:active {
     width: 40%;
     height: 100%;
     transform: translate(-100%);
+    z-index: 1000;
+  }
+  .chat-list--show {
+    transform: translate(0);
   }
   .chat-window {
     width: 100%;
+  }
+  .chat-title__heading {
+    padding-left: 5rem;
   }
   .button__menu {
     font-size: 3rem;
