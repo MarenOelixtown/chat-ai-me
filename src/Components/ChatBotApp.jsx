@@ -270,6 +270,12 @@ const ChatBotApp = ({
           <h3>Chat with AI</h3>
           <button
             className="button--reset button__close"
+            aria-label="Open Chatlist"
+          >
+            <span className="bx bx-menu" aria-hidden="true"></span>
+          </button>
+          <button
+            className="button--reset button__close"
             aria-label="Close Chat AI"
             onClick={onGoBack}
           >
