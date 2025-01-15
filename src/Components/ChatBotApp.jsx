@@ -23,6 +23,7 @@ const ChatBotApp = ({
   const [chatFocus, setChatFocus] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showChatList, setShowChatList] = useState(false);
   const {
     transcript,
     listening,
@@ -269,8 +270,9 @@ const ChatBotApp = ({
         <div className="chat-title">
           <h3>Chat with AI</h3>
           <button
-            className="button--reset button__close"
+            className="button--reset button__menu"
             aria-label="Open Chatlist"
+            onClick={() => setShowChatList(true)}
           >
             <span className="bx bx-menu" aria-hidden="true"></span>
           </button>

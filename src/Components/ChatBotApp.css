@@ -285,4 +285,10 @@ button:active {
   .chat-window {
     width: 100%;
   }
+  .button__menu {
+    font-size: 3rem;
+    color: var(--clr-white);
+    display: block;
+    position: absolute;
+  }
 }
