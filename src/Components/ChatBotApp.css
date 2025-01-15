@@ -269,3 +269,20 @@ button:active {
 .message-form__input:focus::placeholder {
   opacity: 0;
 }
+
+@media (max-width: 56.25em) {
+  .chat-app {
+    flex-direction: column;
+  }
+  .chat-list {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    transform: translate(-100%);
+  }
+  .chat-window {
+    width: 100%;
+  }
+}
